@@ -16,7 +16,7 @@
         <setting name="validation-enabled" value="true" />
         <setting name="provider-name" value="Hibernate" />
         <datasource-mapping>
-          <factory-entry name="spring-crud-app3" />
+          <factory-entry name="spring-crud-app3" value="ad43ae67-00b2-4199-ad56-bca5684dd5ae" />
         </datasource-mapping>
         <naming-strategy-map />
       </configuration>
