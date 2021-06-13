@@ -49,13 +49,13 @@
           <element id="library" level="project" name="Maven: javax.transaction:jta:1.1" />
           <element id="library" level="project" name="Maven: org.springframework:spring-orm:5.3.8" />
           <element id="library" level="project" name="Maven: org.springframework:spring-jdbc:5.3.8" />
-          <element id="library" level="project" name="Maven: jakarta.xml.bind:jakarta.xml.bind-api:2.3.2" />
-          <element id="library" level="project" name="Maven: jakarta.activation:jakarta.activation-api:1.2.1" />
           <element id="library" level="project" name="Maven: org.glassfish.jaxb:jaxb-runtime:2.3.2" />
+          <element id="library" level="project" name="Maven: jakarta.xml.bind:jakarta.xml.bind-api:2.3.2" />
           <element id="library" level="project" name="Maven: org.glassfish.jaxb:txw2:2.3.2" />
           <element id="library" level="project" name="Maven: com.sun.istack:istack-commons-runtime:3.0.8" />
           <element id="library" level="project" name="Maven: org.jvnet.staxex:stax-ex:1.8.1" />
           <element id="library" level="project" name="Maven: com.sun.xml.fastinfoset:FastInfoset:1.2.16" />
+          <element id="library" level="project" name="Maven: jakarta.activation:jakarta.activation-api:1.2.1" />
         </element>
       </element>
       <element id="directory" name="META-INF">
