@@ -7,7 +7,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
-import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -15,7 +14,7 @@ import java.util.List;
 public class UserDAO {
 
 
-    @PersistenceContext(unitName = "entityManagerFactory")
+    @PersistenceContext
     private EntityManager entityManager;
 
 
@@ -39,7 +38,7 @@ public class UserDAO {
     }
 
     public void delete(int id) {
-        int us = entityManager.createQuery("delete from User u where u.id = :id")
+        entityManager.createQuery("delete from User u where u.id = :id")
                 .setParameter("id", id)
                 .executeUpdate();
     }
