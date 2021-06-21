@@ -16,9 +16,10 @@
         <element id="directory" name="lib">
           <element id="library" level="project" name="Maven: org.springframework:spring-core:5.2.1.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-jcl:5.2.1.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-tx:5.1.2.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-beans:5.1.2.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-context:5.2.1.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-aop:5.2.1.RELEASE" />
-          <element id="library" level="project" name="Maven: org.springframework:spring-beans:5.2.1.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-expression:5.2.1.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-web:5.2.1.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-webmvc:5.2.1.RELEASE" />
@@ -29,7 +30,6 @@
           <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:1.7.25" />
           <element id="library" level="project" name="Maven: org.springframework.data:spring-data-jpa:2.0.9.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework.data:spring-data-commons:2.0.9.RELEASE" />
-          <element id="library" level="project" name="Maven: org.springframework:spring-tx:5.0.8.RELEASE" />
           <element id="library" level="project" name="Maven: org.aspectj:aspectjrt:1.8.13" />
           <element id="library" level="project" name="Maven: org.hibernate:hibernate-entitymanager:5.5.0.Final" />
           <element id="library" level="project" name="Maven: org.jboss.logging:jboss-logging:3.4.2.Final" />
