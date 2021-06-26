@@ -22,7 +22,7 @@ public class UserDAO {
         return entityManager.createQuery("SELECT u FROM User u", User.class).getResultList();
     }
 
-    public User show(int id) {
+    public User show(Long id) {
         TypedQuery<User> q = entityManager.createQuery("select u from User u where u.id = :id", User.class);
         q.setParameter("id", id);
         return q.getResultList().stream().findAny().orElse(null);
@@ -32,12 +32,12 @@ public class UserDAO {
         entityManager.persist(user);
     }
 
-    public void update(int id, User updateUser) {
+    public void update(Long id, User updateUser) {
         User userToUpdated = show(id);
         userToUpdated.setName(updateUser.getName());
     }
 
-    public void delete(int id) {
+    public void delete(Long id) {
         entityManager.createQuery("delete from User u where u.id = :id")
                 .setParameter("id", id)
                 .executeUpdate();
