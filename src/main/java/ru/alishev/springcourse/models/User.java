@@ -20,12 +20,17 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String username;
+    private String name;
 
     private String password;
 
     @ManyToMany (fetch = FetchType.EAGER)
     private Set<Role> roles;
+
+    @Override
+    public String getUsername() {
+        return name;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
