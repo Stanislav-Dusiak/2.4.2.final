@@ -31,6 +31,10 @@ CREATE TABLE users_roles
 
 INSERT INTO users
 VALUES (1, 'Stanislav', '12345');
+INSERT INTO users
+VALUES (2, 'Tom', 'q123');
+INSERT INTO users
+VALUES (3, 'Jack', 'z123');
 
 INSERT INTO roles
 VALUES (1, 'ROLE_USER');
@@ -39,4 +43,10 @@ VALUES (2, 'ROLE_ADMIN');
 
 INSERT INTO users_roles
 VALUES (1, 2);
+INSERT INTO users_roles
+VALUES (2, 1);
+INSERT INTO users_roles
+VALUES (3, 1);
+INSERT INTO users_roles
+VALUES (3, 2);
 
