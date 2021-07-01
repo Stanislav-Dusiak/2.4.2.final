@@ -9,7 +9,7 @@ import ru.alishev.springcourse.dao.UserDaoImpl;
 import ru.alishev.springcourse.models.User;
 
 @Controller
-@RequestMapping("/users")
+@RequestMapping("/admin")
 public class UsersController {
 
     private final UserDaoImpl userDaoImpl;
@@ -21,42 +21,42 @@ public class UsersController {
 
     @GetMapping()
     public String index(Model model) {
-        model.addAttribute("users", userDaoImpl.getAllUsers());
-        return "users/index";
+        model.addAttribute("admin", userDaoImpl.getAllUsers());
+        return "admin/index";
     }
 
     @GetMapping("/{id}")
     public String show(@PathVariable("id") Long id, Model model) {
         model.addAttribute("user", userDaoImpl.getUserById(id));
-        return "users/show";
+        return "admin/show";
     }
 
     @GetMapping("/new")
     public String newUser(@ModelAttribute("user") User user) {
-        return "users/new";
+        return "admin/new";
     }
 
     @PostMapping
     public String create(@ModelAttribute("user") User user) {
         userDaoImpl.saveUser(user);
-        return "redirect:/users";
+        return "redirect:/admin";
     }
 
     @GetMapping("/{id}/edit")
     public String edit(Model model, @PathVariable("id") Long id) {
         model.addAttribute("user", userDaoImpl.getUserById(id));
-        return "users/edit";
+        return "admin/edit";
     }
 
     @PatchMapping("/{id}")
     public String update(@ModelAttribute("user") User user, @PathVariable("id") Long id) {
         userDaoImpl.updateUser(user);
-        return "redirect:/users";
+        return "redirect:/admin";
     }
 
     @DeleteMapping("/{id}")
     public String delete(@PathVariable("id") Long id) {
         userDaoImpl.deleteUserById(id);
-        return "redirect:/users";
+        return "redirect:/admin";
     }
 }
