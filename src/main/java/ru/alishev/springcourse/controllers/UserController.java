@@ -5,13 +5,11 @@ import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+
 import ru.alishev.springcourse.dao.UserDaoImpl;
 import ru.alishev.springcourse.models.User;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 
 @Controller
@@ -30,16 +28,14 @@ public class UserController {
         Set<String> roles = AuthorityUtils.authorityListToSet(SecurityContextHolder.getContext().getAuthentication().getAuthorities());
         if (name.equals(user.getName()) || roles.contains("ROLE_ADMIN")) {
             model.addAttribute("user", userDaoImpl.getUserByName(name));
+            return "user";
         } else {
-            model.addAttribute("user", user.getName());
-            model.addAttribute("user", name);
+            return "userAccessDenied";
         }
-        return "user";
     }
 
     @RequestMapping(value = "login", method = RequestMethod.GET)
     public String loginPage() {
         return "login";
     }
-
 }
