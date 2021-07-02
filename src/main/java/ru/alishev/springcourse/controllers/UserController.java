@@ -24,16 +24,6 @@ public class UserController {
         this.userDaoImpl = userDaoImpl;
     }
 
-    @RequestMapping(value = "hello", method = RequestMethod.GET)
-    public String printWelcome(ModelMap model) {
-        List<String> messages = new ArrayList<>();
-        messages.add("Hello!");
-        messages.add("I'm Spring MVC-SECURITY application");
-        messages.add("5.2.0 version by sep'19 ");
-        model.addAttribute("messages", messages);
-        return "hello";
-    }
-
     @RequestMapping(value = "/user{name}")
     public String edit(Model model, @PathVariable("name") String name) {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
