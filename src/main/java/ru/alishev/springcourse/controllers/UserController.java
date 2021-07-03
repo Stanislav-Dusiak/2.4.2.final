@@ -7,8 +7,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import ru.alishev.springcourse.dao.UserDaoImpl;
+
 import ru.alishev.springcourse.models.User;
+import ru.alishev.springcourse.service.UserService;
 
 import java.util.Set;
 
@@ -16,10 +17,10 @@ import java.util.Set;
 @RequestMapping("/")
 public class UserController {
 
-    private final UserDaoImpl userDaoImpl;
+    private final UserService userService;
 
-    public UserController(UserDaoImpl userDaoImpl) {
-        this.userDaoImpl = userDaoImpl;
+    public UserController(UserService userService) {
+        this.userService = userService;
     }
 
     @RequestMapping(value = "/user{name}")
@@ -27,7 +28,7 @@ public class UserController {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Set<String> roles = AuthorityUtils.authorityListToSet(SecurityContextHolder.getContext().getAuthentication().getAuthorities());
         if (name.equals(user.getName()) || roles.contains("ROLE_ADMIN")) {
-            model.addAttribute("user", userDaoImpl.getUserByName(name));
+            model.addAttribute("user", userService.getUserByName(name));
             return "user";
         } else {
             return "userAccessDenied";

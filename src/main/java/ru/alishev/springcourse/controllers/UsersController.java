@@ -6,9 +6,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.alishev.springcourse.dao.RoleDao;
-import ru.alishev.springcourse.dao.UserDao;
-import ru.alishev.springcourse.models.Role;
 import ru.alishev.springcourse.models.User;
+import ru.alishev.springcourse.service.RoleService;
+import ru.alishev.springcourse.service.UserService;
 
 import java.util.Set;
 
@@ -16,24 +16,24 @@ import java.util.Set;
 @RequestMapping("/admin")
 public class UsersController {
 
-    private final UserDao userDaoImpl;
-    private final RoleDao roleDao;
+    private final UserService userService;
+    private final RoleService roleService;
 
     @Autowired
-    public UsersController(UserDao userDaoImpl, RoleDao roleDao) {
-        this.userDaoImpl = userDaoImpl;
-        this.roleDao = roleDao;
+    public UsersController(UserService userService, RoleService roleService) {
+        this.userService = userService;
+        this.roleService = roleService;
     }
 
     @GetMapping()
     public String index(Model model) {
-        model.addAttribute("admin", userDaoImpl.getAllUsers());
+        model.addAttribute("admin", userService.getAllUsers());
         return "admin/index";
     }
 
     @GetMapping("/{id}")
     public String show(@PathVariable("id") Long id, Model model) {
-        model.addAttribute("user", userDaoImpl.getUserById(id));
+        model.addAttribute("user", userService.getUserById(id));
         return "admin/show";
     }
 
@@ -45,7 +45,7 @@ public class UsersController {
     @PostMapping
     public String addUser(@ModelAttribute("User") User user, @RequestParam(value = "AdminId", defaultValue = "2") String[] userRoleId) {
         setRolesFromStringArr(user, userRoleId);
-        userDaoImpl.saveUser(user);
+        userService.saveUser(user);
         return "redirect:/admin";
     }
 
@@ -53,27 +53,27 @@ public class UsersController {
         String ADMIN_ROLE_ID = "1";
         Set<String> userRoles = Set.of(roles);
         if (userRoles.contains(ADMIN_ROLE_ID)) {
-            user.setRoles(Set.of(roleDao.findRoleByString("ROLE_ADMIN"), roleDao.findRoleByString("ROLE_USER")));
+            user.setRoles(Set.of(roleService.findRoleByString("ROLE_ADMIN"), roleService.findRoleByString("ROLE_USER")));
         } else {
-            user.setRoles(Set.of(roleDao.findRoleByString("ROLE_USER")));
+            user.setRoles(Set.of(roleService.findRoleByString("ROLE_USER")));
         }
     }
 
     @GetMapping("/{id}/edit")
     public String edit(Model model, @PathVariable("id") Long id) {
-        model.addAttribute("user", userDaoImpl.getUserById(id));
+        model.addAttribute("user", userService.getUserById(id));
         return "admin/edit";
     }
 
     @PatchMapping("/{id}")
     public String update(@ModelAttribute("user") User user, @PathVariable("id") Long id) {
-        userDaoImpl.updateUser(user);
+        userService.updateUser(user);
         return "redirect:/admin";
     }
 
     @DeleteMapping("/{id}")
     public String delete(@PathVariable("id") Long id) {
-        userDaoImpl.deleteUserById(id);
+        userService.deleteUserById(id);
         return "redirect:/admin";
     }
 }
