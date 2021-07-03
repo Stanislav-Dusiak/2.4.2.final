@@ -5,18 +5,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import ru.alishev.springcourse.dao.UserDaoImpl;
+import ru.alishev.springcourse.dao.RoleDao;
+import ru.alishev.springcourse.dao.UserDao;
+import ru.alishev.springcourse.models.Role;
 import ru.alishev.springcourse.models.User;
+
+import java.util.Set;
 
 @Controller
 @RequestMapping("/admin")
 public class UsersController {
 
-    private final UserDaoImpl userDaoImpl;
+    private final UserDao userDaoImpl;
+    private final RoleDao roleDao;
 
     @Autowired
-    public UsersController(UserDaoImpl userDaoImpl) {
+    public UsersController(UserDao userDaoImpl, RoleDao roleDao) {
         this.userDaoImpl = userDaoImpl;
+        this.roleDao = roleDao;
     }
 
     @GetMapping()
@@ -37,9 +43,20 @@ public class UsersController {
     }
 
     @PostMapping
-    public String create(@ModelAttribute("user") User user) {
+    public String addUser(@ModelAttribute("User") User user, @RequestParam(value = "AdminId", defaultValue = "2") String[] userRoleId) {
+        setRolesFromStringArr(user, userRoleId);
         userDaoImpl.saveUser(user);
         return "redirect:/admin";
+    }
+
+    private void setRolesFromStringArr(User user, String[] roles) {
+        String ADMIN_ROLE_ID = "1";
+        Set<String> userRoles = Set.of(roles);
+        if (userRoles.contains(ADMIN_ROLE_ID)) {
+            user.setRoles(Set.of(roleDao.findRoleByString("ROLE_ADMIN"), roleDao.findRoleByString("ROLE_USER")));
+        } else {
+            user.setRoles(Set.of(roleDao.findRoleByString("ROLE_USER")));
+        }
     }
 
     @GetMapping("/{id}/edit")
