@@ -1,7 +1,6 @@
 package ru.alishev.springcourse.models;
 
 
-
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,7 +11,10 @@ import java.util.Set;
 
 @Entity
 @Table(name = "users")
-@Getter @Setter @AllArgsConstructor @NoArgsConstructor
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @ToString
 
 public class User implements UserDetails {
@@ -24,7 +26,7 @@ public class User implements UserDetails {
 
     private String password;
 
-    @ManyToMany (fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER)
     private Set<Role> roles;
 
     @Override
