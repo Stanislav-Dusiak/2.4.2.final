@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import ru.alishev.springcourse.dao.RoleDao;
 import ru.alishev.springcourse.models.User;
 import ru.alishev.springcourse.service.RoleService;
 import ru.alishev.springcourse.service.UserService;
