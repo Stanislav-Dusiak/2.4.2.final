@@ -7,21 +7,18 @@ import ru.alishev.springcourse.models.Role;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceContext;
 
 import java.util.Optional;
 
 @Component
 public class RoleDaoImpl implements RoleDao{
 
-    private EntityManagerFactory factory;
+    @PersistenceContext(unitName = "entityManagerFactory")
+    private EntityManager manager;
 
-    public RoleDaoImpl(@Autowired EntityManagerFactory factory) {
-        this.factory = factory;
-    }
     @Override
     public Role findRoleByString(String s) {
-        EntityManager manager = factory.createEntityManager();
-        manager.getTransaction().begin();
         Optional<Role> role = Optional.of((Role) manager.createQuery("select r from Role r where r.role=?1").setParameter(1, s).getSingleResult());
         if (role.isPresent()) {
             return role.get();
@@ -31,8 +28,6 @@ public class RoleDaoImpl implements RoleDao{
 
     @Override
     public Role findRoleById(Long id) {
-        EntityManager manager = factory.createEntityManager();
-        manager.getTransaction().begin();
         Optional<Role> role = Optional.of((Role) manager.createQuery("select r from Role r where r.id=?1").setParameter(1, id).getSingleResult());
         if (role.isPresent()) {
             return role.get();
