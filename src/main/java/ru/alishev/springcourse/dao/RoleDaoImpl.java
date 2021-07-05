@@ -1,18 +1,16 @@
 package ru.alishev.springcourse.dao;
 
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.alishev.springcourse.models.Role;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
 
 import java.util.Optional;
 
 @Component
-public class RoleDaoImpl implements RoleDao{
+public class RoleDaoImpl implements RoleDao {
 
     @PersistenceContext(unitName = "entityManagerFactory")
     private EntityManager manager;
